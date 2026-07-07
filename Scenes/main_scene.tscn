@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://5skw733cpprs"]
+
+[ext_resource type="Script" uid="uid://0poy8bvh6jl" path="res://Scripts/main_scene.gd" id="1_52fb6"]
+[ext_resource type="PackedScene" uid="uid://das0gwo25l2hw" path="res://Scenes/pause_menu.tscn" id="2_6l7je"]
+[ext_resource type="PackedScene" uid="uid://48fkchu2ablq" path="res://Scenes/gun_turret.tscn" id="2_iacmt"]
+[ext_resource type="PackedScene" uid="uid://c16hplmwi0hyc" path="res://Scenes/spectator.tscn" id="2_x6ack"]
+[ext_resource type="PackedScene" uid="uid://3rhmxwlv7rio" path="res://Scenes/settings_menu.tscn" id="3_jv6wh"]
+
+[node name="MainScene" type="Node3D" unique_id=1701792309]
+script = ExtResource("1_52fb6")
+
+[node name="GunTurret" parent="." unique_id=1923260398 instance=ExtResource("2_iacmt")]
+
+[node name="Spectator" parent="." unique_id=813639085 instance=ExtResource("2_x6ack")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 4)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1760743794]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=675628209 instance=ExtResource("2_6l7je")]
+visible = false
+
+[node name="SettingsMenu" parent="CanvasLayer" unique_id=1462449719 instance=ExtResource("3_jv6wh")]
+visible = false
