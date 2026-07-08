@@ -9,7 +9,7 @@ func _ready() -> void:
 	continuous_cd = true
 	contact_monitor = true
 	max_contacts_reported = 1
-	retarget_timer.wait_time = 0.5
+	retarget_timer.wait_time = 0.3
 
 func _physics_process(_delta: float) -> void:
 	if position.y < -5:
