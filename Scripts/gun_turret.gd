@@ -2,7 +2,7 @@ class_name GunTurret
 extends StaticBody3D
 
 # Shoot Bullet Variables
-const BULLET_REACH_TIME: float = 0.15
+const BULLET_REACH_TIME: float = 0.1
 const SHOOT_TIMER_WAIT_TIME: float = 0.05
 const BULLET_SCENE = preload("res://Scenes/bullet.tscn")
 var gravity_amount: float = ProjectSettings.get_setting("physics/3d/default_gravity")

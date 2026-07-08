@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var spawn_timer: Timer = $SpawnTimer
 const SPAWN_X_AND_Z_RANGE: int = 15
-const SPEED_RANGE: int = 6
+const SPEED_RANGE: float = 7.5
 const SPAWN_TIME: float = 0.15
 const MOVABLE_ENEMY_SCENE = preload("res://Scenes/movable_enemy.tscn")
 
