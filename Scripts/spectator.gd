@@ -34,7 +34,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	rotation_degrees.y = y_rot_deg
 	movement(delta)
-	velocity_reseter()
+	low_velocity_reseter()
 
 func movement(physics_process_delta: float) -> void:
 	move_vector_relative_to_world = rotate_vector_around_y_axis(move_vector, deg_to_rad(y_rot_deg))
@@ -46,7 +46,7 @@ func rotate_vector_around_y_axis(vector: Vector3, radians: float) -> Vector3:
 func get_speed() -> float:
 	return sqrt(pow(linear_velocity.x, 2) + pow(linear_velocity.y, 2) + pow(linear_velocity.z, 2))
 
-func velocity_reseter() -> void:
+func low_velocity_reseter() -> void:
 	if abs(linear_velocity.z) <= MIN:
 		linear_velocity.z = 0
 
