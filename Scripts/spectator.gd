@@ -6,7 +6,6 @@ const MOVE_MULT: float = 750.01
 const LINEAR_DAMP: float = 12.4
 const MIN: float = 0.1
 var move_speed: int = 20
-var run_input: bool
 var move_vector: Vector3
 var move_vector_relative_to_world: Vector3
 
@@ -23,10 +22,8 @@ func _ready() -> void:
 	can_sleep = false
 	lock_rotation = true
 
-# * Get inputs
+# * Get movement inputs
 func _process(_delta: float) -> void:
-	run_input = Input.is_action_pressed("run")
-
 	# Forward is -Z, Backwards is Z, Right is X, Left is -X, Up is Y, Down is -Y
 	move_vector = Vector3(Input.get_axis("move_left", "move_right"), Input.get_axis("move_down", "move_up"), Input.get_axis("move_forward", "move_back")).normalized()
 
