@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var spawn_timer: Timer = $SpawnTimer
-const SPAWN_RADIUS: int = 10
+const SPAWN_RANGE: int = 15
 const SPAWN_TIME: float = 0.15
 const STATIC_ENEMY_SCENE = preload("res://Scenes/static_enemy.tscn")
 
@@ -13,5 +13,5 @@ func _ready() -> void:
 
 func _on_spawn_timer_timeout() -> void:
 	var new_static_enemy = STATIC_ENEMY_SCENE.instantiate()
-	new_static_enemy.position = global_position + Vector3(randf_range(-SPAWN_RADIUS, SPAWN_RADIUS), randf_range(-SPAWN_RADIUS, SPAWN_RADIUS), randf_range(-SPAWN_RADIUS, SPAWN_RADIUS))
+	new_static_enemy.position = global_position + Vector3(randf_range(-SPAWN_RANGE, SPAWN_RANGE), randf_range(-SPAWN_RANGE, SPAWN_RANGE), randf_range(-SPAWN_RANGE, SPAWN_RANGE))
 	owner.add_child(new_static_enemy)

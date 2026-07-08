@@ -13,7 +13,7 @@ var closest_target: Node3D
 var targets: Array[Node3D]
 
 # Gun Turret Labels Variable
-var show_labels: bool = true
+var show_labels: bool = false
 
 # @onready Variables
 @onready var gun_mesh_holder: Node3D = $GunMeshHolder

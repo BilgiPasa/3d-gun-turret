@@ -21,16 +21,16 @@ background_mode = 2
 sky = SubResource("Sky_huasi")
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_5s483"]
-size = Vector3(60, 0.25, 60)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r07tb"]
 albedo_texture = ExtResource("4_huasi")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_5s483"]
 material = SubResource("StandardMaterial3D_r07tb")
-size = Vector3(60, 0.25, 60)
+size = Vector3(63, 0.2, 63)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5s483"]
+size = Vector3(63, 0.2, 63)
 
 [node name="MainScene" type="Node3D" unique_id=1701792309]
 script = ExtResource("1_52fb6")
@@ -43,28 +43,20 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="SpectatorAndCamera" parent="." unique_id=610738604 instance=ExtResource("3_iacmt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 40)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 40)
 
 [node name="GunTurret" parent="." unique_id=1923260398 instance=ExtResource("2_iacmt")]
 
 [node name="GroundArea" type="Area3D" parent="." unique_id=272544437]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85, 0)
 collision_layer = 0
 collision_mask = 8
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundArea" unique_id=1718899419]
-shape = SubResource("BoxShape3D_5s483")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GroundArea" unique_id=1581159624]
 mesh = SubResource("BoxMesh_5s483")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1760743794]
-
-[node name="PauseMenu" parent="CanvasLayer" unique_id=675628209 instance=ExtResource("2_6l7je")]
-visible = false
-
-[node name="SettingsMenu" parent="CanvasLayer" unique_id=1462449719 instance=ExtResource("3_jv6wh")]
-visible = false
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundArea" unique_id=1718899419]
+shape = SubResource("BoxShape3D_5s483")
 
 [node name="MovableEnemySpawner" type="Node3D" parent="." unique_id=1815563983]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75, 0)
@@ -77,6 +69,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 script = ExtResource("7_huasi")
 
 [node name="SpawnTimer" type="Timer" parent="StaticEnemySpawner" unique_id=147207935]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1760743794]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=675628209 instance=ExtResource("2_6l7je")]
+visible = false
+
+[node name="SettingsMenu" parent="CanvasLayer" unique_id=1462449719 instance=ExtResource("3_jv6wh")]
+visible = false
 
 [connection signal="body_entered" from="GroundArea" to="." method="_on_ground_area_body_entered"]
 [connection signal="timeout" from="MovableEnemySpawner/SpawnTimer" to="MovableEnemySpawner" method="_on_spawn_timer_timeout"]
