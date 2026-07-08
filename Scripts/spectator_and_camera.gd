@@ -3,7 +3,7 @@ extends Node3D
 
 # Camera Rotation
 var mouse_sensitivity: int = 100
-var x_rot_deg: float = 0 # x rotation degrees
+var x_rot_deg: float = 15 # x rotation degrees
 var y_rot_deg: float = 0 # y rotation degrees
 
 # Camera Rotation Multipliers

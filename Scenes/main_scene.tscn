@@ -5,23 +5,58 @@
 [ext_resource type="PackedScene" uid="uid://48fkchu2ablq" path="res://Scenes/gun_turret.tscn" id="2_iacmt"]
 [ext_resource type="PackedScene" uid="uid://b6c0wgax3pf4y" path="res://Scenes/spectator_and_camera.tscn" id="3_iacmt"]
 [ext_resource type="PackedScene" uid="uid://3rhmxwlv7rio" path="res://Scenes/settings_menu.tscn" id="3_jv6wh"]
+[ext_resource type="Texture2D" uid="uid://cfvi3wmcqgwir" path="res://Materials/DarkBlueWithCorners.png" id="4_huasi"]
+[ext_resource type="Script" uid="uid://m20r5ty30drt" path="res://Scripts/movable_enemy_spawner.gd" id="6_maf8m"]
+[ext_resource type="Script" uid="uid://cqv1t3xudaw5m" path="res://Scripts/static_enemy_spawner.gd" id="7_huasi"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_maf8m"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_huasi"]
+sky_material = SubResource("ProceduralSkyMaterial_maf8m")
+
+[sub_resource type="Environment" id="Environment_m1efj"]
+background_mode = 2
+sky = SubResource("Sky_huasi")
+glow_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5s483"]
-size = Vector3(35, 0.25, 35)
+size = Vector3(60, 0.25, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r07tb"]
+albedo_texture = ExtResource("4_huasi")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_5s483"]
+material = SubResource("StandardMaterial3D_r07tb")
+size = Vector3(60, 0.25, 60)
 
 [node name="MainScene" type="Node3D" unique_id=1701792309]
 script = ExtResource("1_52fb6")
 
-[node name="GunTurret" parent="." unique_id=1923260398 instance=ExtResource("2_iacmt")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=684066900]
+environment = SubResource("Environment_m1efj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1320288812]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="SpectatorAndCamera" parent="." unique_id=610738604 instance=ExtResource("3_iacmt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 40)
+
+[node name="GunTurret" parent="." unique_id=1923260398 instance=ExtResource("2_iacmt")]
 
 [node name="GroundArea" type="Area3D" parent="." unique_id=272544437]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GroundArea" unique_id=1718899419]
 shape = SubResource("BoxShape3D_5s483")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GroundArea" unique_id=1581159624]
+mesh = SubResource("BoxMesh_5s483")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1760743794]
 
@@ -30,3 +65,19 @@ visible = false
 
 [node name="SettingsMenu" parent="CanvasLayer" unique_id=1462449719 instance=ExtResource("3_jv6wh")]
 visible = false
+
+[node name="MovableEnemySpawner" type="Node3D" parent="." unique_id=1815563983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75, 0)
+script = ExtResource("6_maf8m")
+
+[node name="SpawnTimer" type="Timer" parent="MovableEnemySpawner" unique_id=1078051425]
+
+[node name="StaticEnemySpawner" type="Node3D" parent="." unique_id=755032629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+script = ExtResource("7_huasi")
+
+[node name="SpawnTimer" type="Timer" parent="StaticEnemySpawner" unique_id=147207935]
+
+[connection signal="body_entered" from="GroundArea" to="." method="_on_ground_area_body_entered"]
+[connection signal="timeout" from="MovableEnemySpawner/SpawnTimer" to="MovableEnemySpawner" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="StaticEnemySpawner/SpawnTimer" to="StaticEnemySpawner" method="_on_spawn_timer_timeout"]

@@ -1,8 +1,8 @@
 extends Node3D
 
-@onready var movable_enemy_spawner: Node2D = $MovableEnemySpawner
+@onready var movable_enemy_spawner: Node3D = $MovableEnemySpawner
 @onready var gun_turret: GunTurret = $GunTurret
-@onready var static_enemy_spawner: Node2D = $StaticEnemySpawner
+@onready var static_enemy_spawner: Node3D = $StaticEnemySpawner
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
 @onready var settings_menu: Control = $CanvasLayer/SettingsMenu
 
@@ -28,11 +28,13 @@ func pause() -> void:
 	get_tree().paused = true
 	pause_menu.process_mode = Node.PROCESS_MODE_INHERIT
 	pause_menu.show()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func resume() -> void:
 	get_tree().paused = false
 	pause_menu.process_mode = Node.PROCESS_MODE_DISABLED
 	pause_menu.hide()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func open_settings() -> void:
 	settings_menu.process_mode = Node.PROCESS_MODE_INHERIT
@@ -41,3 +43,7 @@ func open_settings() -> void:
 func close_settings() -> void:
 	settings_menu.process_mode = Node.PROCESS_MODE_DISABLED
 	settings_menu.hide()
+
+func _on_ground_area_body_entered(body: Node3D) -> void:
+	print("Enemy has hit to the ground")
+	body.queue_free.call_deferred()
