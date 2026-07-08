@@ -10,6 +10,7 @@ func _ready() -> void:
 	pause_menu.hide()
 	settings_menu.process_mode = Node.PROCESS_MODE_DISABLED
 	settings_menu.hide()
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event) -> void:
 	if event.is_action_pressed("ui_cancel"): # If "esc" key pressed
