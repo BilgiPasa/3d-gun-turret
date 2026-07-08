@@ -19,6 +19,9 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_7lsjx")
 size = Vector3(0.8, 0.4, 0.4)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_5s483"]
+radius = 25.0
+
 [node name="GunTurret" type="StaticBody3D" unique_id=830325307]
 collision_layer = 2
 collision_mask = 0
@@ -35,6 +38,8 @@ mesh = SubResource("BoxMesh_5s483")
 [node name="BaseCollShape" type="CollisionShape3D" parent="." unique_id=816295570]
 shape = SubResource("BoxShape3D_5s483")
 
+[node name="CanShootTimer" type="Timer" parent="." unique_id=704099346]
+
 [node name="GunMeshHolder" type="Node3D" parent="." unique_id=257850500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
@@ -42,7 +47,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
 mesh = SubResource("BoxMesh_wkhpl")
 
-[node name="CanShootTimer" type="Timer" parent="." unique_id=704099346]
+[node name="TargetFindArea" type="Area3D" parent="." unique_id=231322757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TargetFindArea" unique_id=1150240484]
+shape = SubResource("SphereShape3D_5s483")
 
 [node name="GunTurretLabels" type="Node3D" parent="." unique_id=580448812]
 

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://chpluv0n3nphb"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://dttbk3fveed6c" path="res://Materials/no_friction_and_bounciness.tres" id="1_oduel"]
+[ext_resource type="Script" uid="uid://idngnh8qf3re" path="res://Scripts/bullet.gd" id="1_xjght"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hlq0"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5s483"]
+material = SubResource("StandardMaterial3D_7hlq0")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_r07tb"]
+radius = 0.25
+
+[node name="Bullet" type="RigidBody3D" unique_id=968706749]
+physics_material_override = ExtResource("1_oduel")
+script = ExtResource("1_xjght")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1946982638]
+mesh = SubResource("SphereMesh_5s483")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1425649007]
+shape = SubResource("SphereShape3D_r07tb")
+
+[node name="LifespanTimer" type="Timer" parent="." unique_id=558150927]
+
+[connection signal="timeout" from="LifespanTimer" to="." method="_on_lifespan_timer_timeout"]

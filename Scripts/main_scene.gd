@@ -1,6 +1,8 @@
 extends Node3D
 
+@onready var movable_enemy_spawner: Node2D = $MovableEnemySpawner
 @onready var gun_turret: GunTurret = $GunTurret
+@onready var static_enemy_spawner: Node2D = $StaticEnemySpawner
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
 @onready var settings_menu: Control = $CanvasLayer/SettingsMenu
 

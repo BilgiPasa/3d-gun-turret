@@ -6,13 +6,22 @@
 [ext_resource type="PackedScene" uid="uid://b6c0wgax3pf4y" path="res://Scenes/spectator_and_camera.tscn" id="3_iacmt"]
 [ext_resource type="PackedScene" uid="uid://3rhmxwlv7rio" path="res://Scenes/settings_menu.tscn" id="3_jv6wh"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5s483"]
+size = Vector3(35, 0.25, 35)
+
 [node name="MainScene" type="Node3D" unique_id=1701792309]
 script = ExtResource("1_52fb6")
 
 [node name="GunTurret" parent="." unique_id=1923260398 instance=ExtResource("2_iacmt")]
 
 [node name="SpectatorAndCamera" parent="." unique_id=610738604 instance=ExtResource("3_iacmt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 6)
+
+[node name="GroundArea" type="Area3D" parent="." unique_id=272544437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundArea" unique_id=1718899419]
+shape = SubResource("BoxShape3D_5s483")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1760743794]
 

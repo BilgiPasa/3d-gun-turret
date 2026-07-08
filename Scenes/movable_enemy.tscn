@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://evrga7dog46o"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://dttbk3fveed6c" path="res://Materials/no_friction_and_bounciness.tres" id="1_yc3t7"]
+[ext_resource type="Script" uid="uid://cb1drrltgqbg0" path="res://Scripts/movable_enemy.gd" id="2_3tnxj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r07tb"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_5s483"]
+material = SubResource("StandardMaterial3D_r07tb")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wkhpl"]
+
+[node name="MovableEnemy" type="RigidBody3D" unique_id=1236163976]
+physics_material_override = ExtResource("1_yc3t7")
+script = ExtResource("2_3tnxj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1632519266]
+mesh = SubResource("SphereMesh_5s483")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=399463269]
+shape = SubResource("SphereShape3D_wkhpl")
+
+[node name="RetargetTimer" type="Timer" parent="." unique_id=243293862]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="RetargetTimer" to="." method="_on_retarget_timer_timeout"]
