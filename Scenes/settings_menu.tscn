@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://3rhmxwlv7rio"]
 
+[ext_resource type="Script" uid="uid://1l43lv5h25c1" path="res://Scripts/settings_menu.gd" id="1_icv2g"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5s483"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -10,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_icv2g")
 
 [node name="Panel" type="Panel" parent="." unique_id=2045447660]
 layout_mode = 1
@@ -19,3 +22,113 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5s483")
+
+[node name="SettingsLabel" type="Label" parent="Panel" unique_id=116751158]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -232.5
+offset_top = 150.0
+offset_right = 232.5
+offset_bottom = 315.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 120
+text = "Settings"
+
+[node name="MESOnOffButton" type="Button" parent="Panel" unique_id=1594292241]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -659.0
+offset_top = -73.0
+offset_right = -241.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../GTOnOffButton")
+focus_neighbor_bottom = NodePath("../GoBackButton")
+focus_next = NodePath("../GTOnOffButton")
+focus_previous = NodePath("../GoBackButton")
+theme_override_font_sizes/font_size = 50
+text = "Disable Movable
+Enemy Spawning"
+
+[node name="GTOnOffButton" type="Button" parent="Panel" unique_id=1202290113]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath("../MESOnOffButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../SESOnOffButton")
+focus_neighbor_bottom = NodePath("../GoBackButton")
+focus_next = NodePath("../SESOnOffButton")
+focus_previous = NodePath("../MESOnOffButton")
+theme_override_font_sizes/font_size = 50
+text = "Disable
+Gun Turret"
+
+[node name="SESOnOffButton" type="Button" parent="Panel" unique_id=852892337]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 241.0
+offset_top = -73.0
+offset_right = 659.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath("../GTOnOffButton")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../GoBackButton")
+focus_neighbor_bottom = NodePath("../GoBackButton")
+focus_next = NodePath("../GoBackButton")
+focus_previous = NodePath("../GTOnOffButton")
+theme_override_font_sizes/font_size = 50
+text = "Disable Static
+Enemy Spawning"
+
+[node name="GoBackButton" type="Button" parent="Panel" unique_id=48565804]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -317.0
+offset_top = -141.0
+offset_right = -75.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_neighbor_left = NodePath("../SESOnOffButton")
+focus_neighbor_top = NodePath("../SESOnOffButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath("../MESOnOffButton")
+focus_previous = NodePath("../SESOnOffButton")
+theme_override_font_sizes/font_size = 60
+text = "Go Back"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Panel/MESOnOffButton" to="." method="_on_mes_on_off_button_pressed"]
+[connection signal="pressed" from="Panel/GTOnOffButton" to="." method="_on_gt_on_off_button_pressed"]
+[connection signal="pressed" from="Panel/SESOnOffButton" to="." method="_on_ses_on_off_button_pressed"]
+[connection signal="pressed" from="Panel/GoBackButton" to="." method="_on_go_back_button_pressed"]

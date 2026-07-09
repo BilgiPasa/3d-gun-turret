@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://das0gwo25l2hw"]
 
+[ext_resource type="Script" uid="uid://c74jcl0cwkl5r" path="res://Scripts/pause_menu.gd" id="1_emv3i"]
+
 [node name="PauseMenu" type="Control" unique_id=675628209]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_emv3i")
 
 [node name="Panel" type="Panel" parent="." unique_id=993617311]
 layout_mode = 1
@@ -15,3 +18,103 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PauseLabel" type="Label" parent="Panel" unique_id=614971082]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -211.0
+offset_top = 100.0
+offset_right = 211.0
+offset_bottom = 265.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 120
+text = "Paused"
+
+[node name="ResumeButton" type="Button" parent="Panel" unique_id=90613296]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = -190.0
+offset_right = 178.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../QuitButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+focus_next = NodePath("../SettingsButton")
+focus_previous = NodePath("../QuitButton")
+theme_override_font_sizes/font_size = 90
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="Panel" unique_id=266550942]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -178.0
+offset_top = 10.0
+offset_right = 178.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../ResumeButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../ResumeButton")
+theme_override_font_sizes/font_size = 90
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="Panel" unique_id=1687929371]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 210.0
+offset_right = 88.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../ResumeButton")
+focus_next = NodePath("../ResumeButton")
+focus_previous = NodePath("../SettingsButton")
+theme_override_font_sizes/font_size = 80
+text = "Quit"
+
+[node name="VersionLabel" type="Label" parent="Panel" unique_id=872182271]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -85.0
+offset_right = -24.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "vA.B"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="Panel/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Panel/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Panel/QuitButton" to="." method="_on_quit_button_pressed"]
