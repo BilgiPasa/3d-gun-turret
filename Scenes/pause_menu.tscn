@@ -114,6 +114,32 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 50
 text = "vA.B"
 
+[node name="EnemyHitGroundCountLabel" type="Label" parent="Panel" unique_id=933774251]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 10.0
+offset_right = -20.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
+text = "0 enemies have hit to the ground"
+
+[node name="EnemyHitGTCountLabel" type="Label" parent="Panel" unique_id=1441273605]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -456.0
+offset_top = 47.5
+offset_right = -20.0
+offset_bottom = 82.5
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 25
+text = "0 enemies have hit to the gun turret"
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="Panel/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Panel/SettingsButton" to="." method="_on_settings_button_pressed"]

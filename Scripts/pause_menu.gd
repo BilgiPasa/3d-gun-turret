@@ -5,6 +5,8 @@ signal open_settings
 
 @onready var resume_button: Button = $Panel/ResumeButton
 @onready var version_label: Label = $Panel/VersionLabel
+@onready var enemy_hit_ground_count_label: Label = $Panel/EnemyHitGroundCountLabel
+@onready var enemy_hit_gt_count_label: Label = $Panel/EnemyHitGTCountLabel
 
 func _ready() -> void:
 	version_label.text = "v" + str(ProjectSettings.get_setting("application/config/version"))

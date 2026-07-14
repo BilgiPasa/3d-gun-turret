@@ -5,6 +5,7 @@ extends Node3D
 @onready var static_enemy_spawner: Node3D = $StaticEnemySpawner
 @onready var pause_menu: Control = $CanvasLayer/PauseMenu
 @onready var settings_menu: Control = $CanvasLayer/SettingsMenu
+var enemy_hit_ground_count: int = 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -48,8 +49,12 @@ func close_settings() -> void:
 	pause_menu.show()
 	settings_menu.hide()
 
+func _on_gun_turret_update_hit_lbl(hit_count: int) -> void:
+	pause_menu.enemy_hit_gt_count_label.text = "%d enemies have hit to the gun turret" % hit_count
+
 func _on_ground_area_body_entered(body: Node3D) -> void:
-	print("Enemy has hit to the ground")
+	enemy_hit_ground_count += 1
+	pause_menu.enemy_hit_ground_count_label.text = "%d enemies have hit to the ground" % enemy_hit_ground_count
 	body.queue_free.call_deferred()
 
 func _on_pause_menu_resume() -> void:
@@ -60,29 +65,23 @@ func _on_pause_menu_open_settings() -> void:
 
 func _on_settings_menu_turn_on_mes() -> void: # mes = movable enemy spawner
 	movable_enemy_spawner.process_mode = Node.PROCESS_MODE_PAUSABLE
-	print("Movable enemy spawning enabled.")
 
 func _on_settings_menu_turn_off_mes() -> void: # mes = movable enemy spawner
 	movable_enemy_spawner.process_mode = Node.PROCESS_MODE_DISABLED
-	print("Movable enemy spawning disabled.")
 
 func _on_settings_menu_turn_on_gt() -> void: # gt = gun turret
 	gun_turret.process_mode = Node.PROCESS_MODE_PAUSABLE
 	gun_turret.show()
-	print("Gun turret enabled.")
 
 func _on_settings_menu_turn_off_gt() -> void: # gt = gun turret
 	gun_turret.process_mode = Node.PROCESS_MODE_DISABLED
 	gun_turret.hide()
-	print("Gun turret disabled.")
 
 func _on_settings_menu_turn_on_ses() -> void: # ses = static enemy spawner
 	static_enemy_spawner.process_mode = Node.PROCESS_MODE_PAUSABLE
-	print("Static enemy spawning enabled.")
 
 func _on_settings_menu_turn_off_ses() -> void: # ses = static enemy spawner
 	static_enemy_spawner.process_mode = Node.PROCESS_MODE_DISABLED
-	print("Static enemy spawning disabled.")
 
 func _on_settings_menu_go_back() -> void:
 	close_settings()

@@ -1,6 +1,8 @@
 class_name GunTurret
 extends StaticBody3D
 
+signal update_hit_lbl(hit_count: int)
+
 # Shoot Bullet Variables
 const BULLET_REACH_TIME: float = 0.1
 const SHOOT_TIMER_WAIT_TIME: float = 0.05
@@ -12,14 +14,15 @@ var shoot_vector: Vector3
 var closest_target: Node3D
 var targets: Array[Node3D]
 
-# Gun Turret Labels Variable
-var show_labels: bool = false
-
 # @onready Variables
 @onready var gun_mesh_holder: Node3D = $GunMeshHolder
 @onready var can_shoot_timer: Timer = $CanShootTimer
 @onready var target_find_area: Area3D = $TargetFindArea
 @onready var gun_turret_labels: Node3D = $GunTurretLabels
+
+# Other Variables
+var enemy_hit_gt_count: int = 0
+var show_labels: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
@@ -108,5 +111,6 @@ func _on_can_shoot_timer_timeout() -> void:
 	can_shoot = true
 
 func _on_gt_area_body_entered(body: Node3D) -> void:
-	print("Enemy has hit to the gun turret")
+	enemy_hit_gt_count += 1
+	update_hit_lbl.emit(enemy_hit_gt_count)
 	body.queue_free.call_deferred()
