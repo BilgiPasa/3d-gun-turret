@@ -2,10 +2,10 @@ class_name Spectator
 extends RigidBody3D
 
 # Movement
-const MOVE_MULT: float = 750.01
-const LINEAR_DAMP: float = 12.4
+const MOVE_SPEED: int = 20
+const MOVE_MULT: int = 400
+const LINEAR_DAMP: float = 6.5665
 const MIN: float = 0.1
-var move_speed: int = 20
 var move_vector: Vector3
 var move_vector_relative_to_world: Vector3
 
@@ -35,7 +35,7 @@ func _physics_process(delta: float) -> void:
 
 func movement(physics_process_delta: float) -> void:
 	move_vector_relative_to_world = rotate_vector_around_y_axis(move_vector, deg_to_rad(y_rot_deg))
-	apply_force(move_speed * MOVE_MULT * physics_process_delta * mass * move_vector_relative_to_world)
+	apply_force(MOVE_SPEED * MOVE_MULT * physics_process_delta * mass * move_vector_relative_to_world)
 
 func rotate_vector_around_y_axis(vector: Vector3, radians: float) -> Vector3:
 	return Vector3(vector.x * cos(radians) + vector.z * sin(radians), vector.y, -vector.x * sin(radians) + vector.z * cos(radians))
