@@ -4,7 +4,7 @@
 [ext_resource type="PhysicsMaterial" uid="uid://dttbk3fveed6c" path="res://Materials/no_friction_and_bounciness.tres" id="1_knhbg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_r07tb"]
-size = Vector3(0.15, 0.6, 0.15)
+size = Vector3(0.2, 0.6, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_5s483"]
 size = Vector3(1.5, 1.5, 1.5)
@@ -31,7 +31,7 @@ collision_mask = 0
 physics_material_override = ExtResource("1_knhbg")
 script = ExtResource("1_7l53o")
 
-[node name="GunHolderMesh" type="MeshInstance3D" parent="." unique_id=220098245]
+[node name="GunHolderMeshInst" type="MeshInstance3D" parent="." unique_id=220098245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.025, 0)
 mesh = SubResource("BoxMesh_r07tb")
 
@@ -43,10 +43,10 @@ shape = SubResource("BoxShape3D_5s483")
 
 [node name="CanShootTimer" type="Timer" parent="." unique_id=704099346]
 
-[node name="GunMeshHolder" type="Node3D" parent="." unique_id=257850500]
+[node name="GunHolder" type="Node3D" parent="." unique_id=257850500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="GunMesh" type="MeshInstance3D" parent="GunMeshHolder" unique_id=72358189]
+[node name="GunMeshInst" type="MeshInstance3D" parent="GunHolder" unique_id=72358189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
 mesh = SubResource("BoxMesh_wkhpl")
 
@@ -64,36 +64,6 @@ collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GTArea" unique_id=1717145314]
 shape = SubResource("BoxShape3D_r07tb")
-
-[node name="GunTurretLabels" type="Node3D" parent="." unique_id=580448812]
-
-[node name="GunTurretLabel" type="Label3D" parent="GunTurretLabels" unique_id=365531353]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.755)
-text = "Gun
-Turret"
-font_size = 75
-outline_size = 15
-
-[node name="GunTurretLabel2" type="Label3D" parent="GunTurretLabels" unique_id=1422284475]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.755, 0, 0)
-text = "Gun
-Turret"
-font_size = 75
-outline_size = 15
-
-[node name="GunTurretLabel3" type="Label3D" parent="GunTurretLabels" unique_id=2017367714]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.755)
-text = "Gun
-Turret"
-font_size = 75
-outline_size = 15
-
-[node name="GunTurretLabel4" type="Label3D" parent="GunTurretLabels" unique_id=98852286]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.755, 0, 0)
-text = "Gun
-Turret"
-font_size = 75
-outline_size = 15
 
 [connection signal="timeout" from="CanShootTimer" to="." method="_on_can_shoot_timer_timeout"]
 [connection signal="body_entered" from="GTArea" to="." method="_on_gt_area_body_entered"]

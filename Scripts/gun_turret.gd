@@ -14,23 +14,16 @@ var closest_target: Node3D
 var targets: Array[Node3D]
 
 # @onready Variables
-@onready var gun_mesh_holder: Node3D = $GunMeshHolder
+@onready var gun_holder: Node3D = $GunHolder
 @onready var can_shoot_timer: Timer = $CanShootTimer
 @onready var target_find_area: Area3D = $TargetFindArea
-@onready var gun_turret_labels: Node3D = $GunTurretLabels
 
-# Other Variables
+# Enemy Hit Gun Turret Count Variable
 var enemy_hit_gt_count: int = 0
-var show_labels: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
 	can_shoot_timer.wait_time = Globals.GT_CAN_SHOOT_TIMER_WAIT_TIME
-
-	if show_labels:
-		gun_turret_labels.show()
-	else:
-		gun_turret_labels.hide()
 
 func _physics_process(delta: float) -> void:
 	attack_closest_target(delta)
@@ -49,7 +42,7 @@ func shoot_bullet_to(target: Node3D, physics_delta: float) -> void:
 	var new_bullet = BULLET_SCENE.instantiate()
 
 	# Find the position of the target relative to the gun
-	target_relative_position = Vector3(target.global_position.x - gun_mesh_holder.global_position.x, target.global_position.y - gun_mesh_holder.global_position.y, target.global_position.z - gun_mesh_holder.global_position.z)
+	target_relative_position = Vector3(target.global_position.x - gun_holder.global_position.x, target.global_position.y - gun_holder.global_position.y, target.global_position.z - gun_holder.global_position.z)
 
 	if target is MovableEnemy:
 		# Calculate X speed
@@ -72,8 +65,8 @@ func shoot_bullet_to(target: Node3D, physics_delta: float) -> void:
 		# Calculate Z speed
 		shoot_vector.z = (target_relative_position.z / bullet_reach_time)
 
-	gun_mesh_holder.look_at(shoot_vector) # Make the gun mesh look at the target
-	new_bullet.position = gun_mesh_holder.global_position # Initialize the position of the bullet
+	gun_holder.look_at(shoot_vector) # Make the gun look at the target
+	new_bullet.position = gun_holder.global_position # Initialize the position of the bullet
 	owner.add_child(new_bullet) # Add the bullet to the scene
 	new_bullet.linear_velocity = shoot_vector # Add velocity to the bullet
 
@@ -99,11 +92,6 @@ func give_closest_target() -> Node3D:
 # Calculate how far is the target from the gun turret ground
 func how_far_from_gun_turret_ground(target_global_position: Vector3) -> float:
 	return abs(target_global_position.y - global_position.y)
-
-# Calculate how far is the target from the gun
-func how_far_from_gun(target_global_position: Vector3) -> float:
-	target_relative_position = Vector3(target_global_position.x - gun_mesh_holder.global_position.x, target_global_position.y - gun_mesh_holder.global_position.y, target_global_position.z - gun_mesh_holder.global_position.z)
-	return sqrt(pow(target_relative_position.x, 2) + pow(target_relative_position.y, 2) + pow(target_relative_position.z, 2))
 
 func _on_can_shoot_timer_timeout() -> void:
 	can_shoot_timer.stop()
