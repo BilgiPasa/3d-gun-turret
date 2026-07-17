@@ -11,7 +11,7 @@ func _ready() -> void:
 	max_contacts_reported = 1
 	freeze = true
 	freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
-	retarget_timer.wait_time = 0.2
+	retarget_timer.wait_time = Globals.GT_BULLET_REACH_TIME * 2
 
 func _on_body_entered(body: Node) -> void:
 	body.queue_free.call_deferred()

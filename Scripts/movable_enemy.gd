@@ -9,7 +9,7 @@ func _ready() -> void:
 	continuous_cd = true
 	contact_monitor = true
 	max_contacts_reported = 1
-	retarget_timer.wait_time = 0.2
+	retarget_timer.wait_time = Globals.GT_BULLET_REACH_TIME * 2
 
 func _physics_process(_delta: float) -> void:
 	if position.y < -5:

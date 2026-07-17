@@ -4,9 +4,8 @@ extends StaticBody3D
 signal update_hit_lbl(hit_count: int)
 
 # Shoot Bullet Variables
-const BULLET_REACH_TIME: float = 0.1
-const SHOOT_TIMER_WAIT_TIME: float = 0.05
 const BULLET_SCENE = preload("res://Scenes/bullet.tscn")
+var bullet_reach_time: float = Globals.GT_BULLET_REACH_TIME
 var gravity_amount: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var can_shoot: bool = true
 var target_relative_position: Vector3
@@ -26,7 +25,7 @@ var show_labels: bool = false
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
-	can_shoot_timer.wait_time = SHOOT_TIMER_WAIT_TIME
+	can_shoot_timer.wait_time = Globals.GT_CAN_SHOOT_TIMER_WAIT_TIME
 
 	if show_labels:
 		gun_turret_labels.show()
@@ -54,24 +53,24 @@ func shoot_bullet_to(target: Node3D, physics_delta: float) -> void:
 
 	if target is MovableEnemy:
 		# Calculate X speed
-		shoot_vector.x = (target_relative_position.x / BULLET_REACH_TIME) + target.linear_velocity.x
+		shoot_vector.x = (target_relative_position.x / bullet_reach_time) + target.linear_velocity.x
 
 		# Calculate Y speed
 		# There is no gravity calculation here because the bullet and the movable enemy have the same gravity.
-		shoot_vector.y = (target_relative_position.y / BULLET_REACH_TIME) + target.linear_velocity.y
+		shoot_vector.y = (target_relative_position.y / bullet_reach_time) + target.linear_velocity.y
 
 		# Calculate Z speed
-		shoot_vector.z = (target_relative_position.z / BULLET_REACH_TIME) + target.linear_velocity.z
+		shoot_vector.z = (target_relative_position.z / bullet_reach_time) + target.linear_velocity.z
 	else:
 		# Calculate X speed
-		shoot_vector.x = target_relative_position.x / BULLET_REACH_TIME
+		shoot_vector.x = target_relative_position.x / bullet_reach_time
 
 		# Calculate Y speed
 		# At the line below, I used (physics_delta * 5) to hit the target better because if I don't add it, it might miss the target by a small distance.
-		shoot_vector.y = (target_relative_position.y / BULLET_REACH_TIME) - (gravity_amount * (BULLET_REACH_TIME + (physics_delta * 5)) / 2)
+		shoot_vector.y = (target_relative_position.y / bullet_reach_time) - (gravity_amount * (bullet_reach_time + (physics_delta * 5)) / 2)
 
 		# Calculate Z speed
-		shoot_vector.z = (target_relative_position.z / BULLET_REACH_TIME)
+		shoot_vector.z = (target_relative_position.z / bullet_reach_time)
 
 	gun_mesh_holder.look_at(shoot_vector) # Make the gun mesh look at the target
 	new_bullet.position = gun_mesh_holder.global_position # Initialize the position of the bullet
